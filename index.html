@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RUNBD — Infinite Parkour</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+  <!-- QR code library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="screen-home" class="screen active">
+  <div class="stars" id="stars"></div>
+  <div class="home-content">
+    <div class="logo"><span class="r">R</span><span class="u">U</span><span class="n">N</span><span class="b">B</span><span class="d2">D</span></div>
+    <p class="tagline">run. jump. survive. don't get lasered.</p>
+    <div class="menu-buttons">
+      <button class="btn btn-primary" id="btn-solo">▶ SOLO</button>
+      <button class="btn btn-secondary" id="btn-local2">👥 LOCAL 2P</button>
+      <button class="btn btn-secondary" id="btn-local3">👥👥 LOCAL 3P</button>
+      <button class="btn btn-wifi" id="btn-host">📡 HOST ONLINE</button>
+      <button class="btn btn-ghost" id="btn-join-qr">📷 JOIN VIA QR</button>
+    </div>
+    <div class="controls-preview">
+      <div class="ctrl-col"><span class="ctrl-label p1c">P1</span><span>← → Jump↑ X=Punch Z=Arrow</span></div>
+      <div class="ctrl-col"><span class="ctrl-label p2c">P2</span><span>A D W X=Punch Z=Arrow (local)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOST SCREEN -->
+<div id="screen-host" class="screen">
+  <div class="panel">
+    <h2 class="panel-title">HOST GAME</h2>
+    <p class="panel-desc">Other players scan this QR code to join instantly.</p>
+    <div id="host-qr-wrap">
+      <div id="host-qr"></div>
+      <p id="host-qr-status">Generating QR code...</p>
+    </div>
+    <div class="player-count-row">
+      <span>Waiting for players:</span>
+      <span id="host-player-count" class="player-count-badge">1 / 3</span>
+    </div>
+    <button class="btn btn-primary" id="btn-host-start" disabled>START GAME</button>
+    <button class="btn btn-ghost back-btn" id="btn-host-back">← Back</button>
+    <div id="host-status" class="status-msg"></div>
+  </div>
+</div>
+
+<!-- JOIN SCREEN -->
+<div id="screen-join" class="screen">
+  <div class="panel">
+    <h2 class="panel-title">JOINING...</h2>
+    <p class="panel-desc">Connecting to host. Please wait.</p>
+    <div class="spinner"></div>
+    <div id="join-status" class="status-msg"></div>
+    <button class="btn btn-ghost back-btn" id="btn-join-back">← Back</button>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="screen-game" class="screen">
+  <div id="hud">
+    <div id="hud-players"></div>
+    <div id="hud-center">
+      <span id="hud-dist">0m</span>
+    </div>
+    <div id="hud-laser">
+      <div id="laser-bar-wrap"><div id="laser-bar"></div></div>
+      <span>⚡ LASER</span>
+    </div>
+  </div>
+  <canvas id="game-canvas"></canvas>
+</div>
+
+<!-- DEAD SCREEN (one player died) -->
+<div id="screen-dead" class="screen">
+  <div class="win-content">
+    <div id="dead-text" class="win-text"></div>
+    <div class="win-sub">GOT LASERED</div>
+    <button class="btn btn-primary" id="btn-dead-retry">TRY AGAIN</button>
+    <button class="btn btn-ghost" id="btn-dead-home">HOME</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
